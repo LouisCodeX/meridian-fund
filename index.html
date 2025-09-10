@@ -1,317 +1,250 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Meridian Fund — Market Neutral</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Serif:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#ffffff;
-      --ink:#0d0e10;
-      --muted:#6b6f76;
-      --accent:#5aa6aa;
-      --accent-2:#d9dde1;
-      --card:#fafafa;
-      --ring:#e6eef0;
-      --shadow: 0 10px 30px rgba(10,20,30,.12);
-      --radius: 22px;
-      --maxw: 1080px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45}
-    a{color:var(--ink);text-decoration:none}
-    .shell{max-width:var(--maxw);margin:0 auto;padding:28px 20px 80px}
-    .hero{
-      position:relative;
-      margin-top:28px;
-      padding:48px 28px;
-      border-radius:var(--radius);
-      background:
-        radial-gradient(1200px 600px at 10% 0%, rgba(90,166,170,.08), transparent 50%),
-        radial-gradient(1000px 600px at 90% 100%, rgba(17, 119, 139, .08), transparent 50%),
-        linear-gradient(180deg, #fff, #f9fbfb 80%);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .logo-row{display:flex;align-items:center;gap:18px}
-    .logo-row img{width:58px;height:58px}
-    .tag{font-weight:600;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
-    h1{font-size:54px;line-height:1.05;margin:4px 0 10px;font-weight:800;letter-spacing:-.01em}
-    .subtitle{font-size:20px;color:#202226;max-width:850px}
-    .cta-wrap{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
-    .btn{
-      border-radius:999px;
-      padding:12px 18px;
-      font-weight:600;
-      border:1px solid var(--ring);
-      background:#fff;
-      transition:transform .06s ease, box-shadow .2s ease, background .2s ease;
-      box-shadow: 0 4px 12px rgba(20,30,40,.05);
-    }
-    .btn:hover{transform:translateY(-1px);box-shadow: 0 10px 20px rgba(20,30,40,.10)}
-    .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12,1fr);
-      gap:22px;
-      margin-top:34px;
-    }
-    .card{
-      grid-column: span 6;
-      background:linear-gradient(180deg,#fff, #fbfbfb);
-      border:1px solid var(--ring);
-      border-radius:var(--radius);
-      padding:24px 22px;
-      box-shadow: var(--shadow);
-    }
-    .card h3{margin:0 0 10px;font-size:22px}
-    .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
-    .lead{font-size:18px;color:#202226}
-    section{margin-top:64px}
-    section h2{font-size:34px;letter-spacing:-.01em;margin:0 0 12px}
-    .two{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;align-items:start}
-    .pill{
-      display:inline-flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--ring);
-      border-radius:999px;padding:8px 12px;font-weight:600;color:#1d2b2d
-    }
-    ul.clean{padding-left:18px;margin:10px 0}
-    ul.clean li{margin:6px 0}
-    .statline{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
-    .stat{padding:10px 12px;border-radius:12px;background:#fff;border:1px solid var(--ring);font-weight:700}
-    .note{color:var(--muted);font-size:14px}
-    .table-wrap{overflow:auto;border:1px solid var(--ring);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
-    table{border-collapse:collapse;width:100%;min-width:880px}
-    th,td{padding:10px 12px;border-bottom:1px solid #eef1f3;text-align:right;font-variant-numeric:tabular-nums}
-    th:first-child, td:first-child{text-align:left;white-space:nowrap}
-    th{background:#f7fafb;font-size:12px;letter-spacing:.12em;color:#4d535a;text-transform:uppercase}
-    .team{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
-    .person{
-      grid-column: span 6;
-      display:grid;
-      grid-template-columns: 120px 1fr;
-      gap:16px;
-      align-items:center;
-      background:linear-gradient(180deg,#fff,#fbfbfb);
-      border:1px solid var(--ring);
-      border-radius:16px;
-      padding:16px;
-      box-shadow:var(--shadow);
-    }
-    .person img{width:120px;height:120px;border-radius:14px;object-fit:cover;object-position:center}
-    .person h4{margin:0;font-size:18px}
-    .person .role{color:var(--muted);font-weight:600;margin-top:2px;margin-bottom:8px}
-    .foot{
-      margin-top:50px;padding:24px;border:1px dashed var(--ring);border-radius:12px;background:#fff
-    }
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
-    @media (max-width: 960px){
-      h1{font-size:40px}
-      .grid .card{grid-column:span 12}
-      .person{grid-column:span 12;grid-template-columns:96px 1fr}
-      .two{grid-template-columns:1fr}
-    }
-    @media print{
-      .btn,.cta-wrap{display:none !important}
-      .shell{padding:10px 10px 0}
-      .hero{box-shadow:none;border:0}
-      section{break-inside:avoid}
-      .person{page-break-inside:avoid}
-      .foot{page-break-inside:avoid}
-    }
-    .motif{
-      position:absolute;right:-140px;top:-80px;width:520px;height:520px;pointer-events:none;opacity:.12;filter:saturate(1.1);
-      background:
-        conic-gradient(from 90deg at 50% 50%, rgba(0,0,0,.0) 0 25%, var(--accent) 0 50%, rgba(0,0,0,.0) 0 75%, var(--accent-2) 0 100%);
-      -webkit-mask:radial-gradient(250px 250px at 50% 50%, #000 60%, transparent 61%);
-      mask:radial-gradient(250px 250px at 50% 50%, #000 60%, transparent 61%);
-      border-radius:50%;
-      transform:rotate(20deg);
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Meridian Fund — Market Neutral</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fff; --ink:#0d0e10; --muted:#6b6f76; --card:#fff; --ring:#e8edf1;
+    --shadow:0 12px 40px rgba(16,24,40,.12); --radius:18px; --maxw:816px;
+    --accent:#127a87;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,Arial,sans-serif;line-height:1.5}
+  a{color:var(--ink);text-decoration:none}
+  .shell{max-width:var(--maxw);margin:0 auto;padding:40px 24px}
+
+  .kicker{font-weight:600;color:#334155;letter-spacing:.16em;text-transform:uppercase}
+  .hero h1{font-size:42px;line-height:1.05;margin:.3rem 0 1rem;font-weight:800;letter-spacing:-.02em}
+  .lead{font-size:18px;color:#1f2937}
+
+  h2{font-size:26px;margin:0 0 .6rem}
+  h3{font-size:18px;margin:10px 0 6px}
+  ul{padding-left:22px;margin:.4rem 0 .6rem}
+  li{margin:.2rem 0}
+
+  .card{background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);
+        box-shadow:var(--shadow);padding:18px 18px 10px;margin:22px 0;page-break-inside:avoid}
+  .pill{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid var(--ring);
+        background:#fbfdff;font-weight:700;margin:.35rem .5rem .35rem 0}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .team{display:grid;grid-template-columns:1fr;gap:14px}
+  .person{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:center;border:1px solid var(--ring);
+          border-radius:14px;background:#fff;box-shadow:var(--shadow);padding:12px}
+  .photo{width:76px;height:76px;border-radius:10px;object-fit:cover;object-position:center;background:#eaeaea}
+  .name{font-weight:700}
+  .role{color:var(--muted);font-weight:600}
+
+  .footer{font-size:13px;color:#1f2937;border:1px dashed var(--ring);border-radius:12px;padding:14px;page-break-inside:avoid}
+
+  .btnbar{display:flex;gap:10px;margin:14px 0 10px}
+  .btn{background:var(--ink);color:#fff;border:none;border-radius:999px;padding:10px 14px;font-weight:700;
+       box-shadow:0 10px 24px rgba(16,24,40,.15);cursor:pointer}
+
+  /* Print-friendly */
+  @media print{
+    @page { size: A4; margin: 14mm; }
+    .btnbar{display:none !important}
+    .card, .footer, .person{break-inside:avoid-page}
+    h2, h3{break-after:avoid-page}
+    .two-col{grid-template-columns:1fr;gap:0}
+    .hero h1{font-size:36px}
+  }
+  .avoid-break{page-break-inside:avoid;break-inside:avoid}
+  .small{font-size:13px}
+  .muted{color:var(--muted)}
+  .table{width:100%;border-collapse:collapse;border:1px solid var(--ring);border-radius:12px;overflow:hidden}
+  .table th,.table td{border-bottom:1px solid var(--ring);padding:10px 8px;text-align:right}
+  .table th:first-child,.table td:first-child{text-align:left}
+  .caption{font-weight:700;margin:4px 0 6px}
+</style>
 </head>
 <body>
-  <div class="shell">
-    <section class="hero">
-      <div class="motif" aria-hidden="true"></div>
-      <div class="logo-row">
-        <img src="logo.png" alt="Meridian Fund logo">
-        <div class="tag">Meridian Fund • Market Neutral</div>
-      </div>
-      <h1>Flexible, multi-strategy crypto fund run by practitioners</h1>
-      <p class="subtitle">Objective: uncorrelated crypto alpha (returns independent from the market), a stable return profile, clean execution, and institutional governance. Risk-controlled foundation with room for tactical directional exposure when our signals justify it.</p>
-      <div class="cta-wrap">
-        <a class="btn primary" href="javascript:window.print()">Save as PDF</a>
-        <a class="btn" href="mailto:hello@dfi-labs.com?subject=Meridian%20Fund%20—%20Request%20details">Request details</a>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <div class="eyebrow">Vehicle &amp; governance</div>
-          <h3>Ring-fenced, institutional, and practical</h3>
-          <p class="lead">
-            Meridian Fund SP is a <strong>Segregated Portfolio (SP)</strong> within Atitlan SPC Cayman (<strong>SPC = Segregated Portfolio Company</strong>), providing statutory ring-fencing of assets and liabilities, independent directors, AML officers, and board-approved policies (valuation, best execution, conflicts, cyber).
-          </p>
-          <div class="statline">
-            <span class="stat">PSAN registration in France (AMF E2022-032)</span>
-            <span class="stat">Direct multi-exchange or prime-brokered DMA</span>
-            <span class="stat">Optional third-party custody for reserves</span>
-          </div>
-        </div>
-        <div class="card">
-          <div class="eyebrow">Counterparty risk</div>
-          <h3>Diversified and capped—no large idle balances</h3>
-          <p class="lead">
-            Venue diversification with <em>per-venue caps</em>, minimal idle balances on exchanges, optional custody for reserves, and a flexible counterparty setup so we are not tied to any single provider.
-          </p>
-          <ul class="clean">
-            <li>Exposure ladders by liquidity bucket (how fast we can exit) and stress-loss checkpoints.</li>
-            <li>Daily oversight; weekly IC (Investment Committee) for sizing/rotation.</li>
-            <li>Books are <strong>activated only when post-cost edge is positive</strong>; otherwise, they sit at zero.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+<div class="shell" id="pdf-root">
 
-    <section>
-      <h2>Strategy books</h2>
-      <div class="two">
-        <div>
-          <div class="pill">Machine-learning long/short (perps/spot-perp)</div>
-          <p>ML-driven long/short in liquid markets, refreshed daily to capture cross-sectional momentum (assets that recently outperformed/underperformed). Directional exposure can be taken when model confidence is high.</p>
-
-          <div class="pill">Basis, opportunistic</div>
-          <p>Cash-and-carry or funding capture only when yields are attractive, usually in a few bursts per year. When carry is thin, we stand down.</p>
-
-          <div class="pill">Gamma harvesting, options</div>
-          <p>Short-dated, hedged premium capture on top venues, <strong>sized small</strong>, with strict limits and quick adjustments.</p>
-
-          <div class="pill">Yield on idle cash</div>
-          <p>Conservative yield on USD/stablecoins via tokenised T-bills and custodial programs. Higher-risk yield (structured funding capture or secured lending) only when carry clearly exceeds costs and within hard limits.</p>
-        </div>
-        <div class="card">
-          <div class="eyebrow">Allocation &amp; risk</div>
-          <h3>How we deploy, rotate, and cut</h3>
-          <ul class="clean">
-            <li><strong>Decisioning:</strong> daily PM oversight + weekly IC to size, rotate, or pause books.</li>
-            <li><strong>Activation rule:</strong> expected profit <em>after all costs</em> (fees, funding/borrow, execution slippage) must be clearly positive.</li>
-            <li><strong>Loss checkpoints:</strong> each book has pre-set loss triggers; portfolio-level limits sit on top.</li>
-            <li><strong>VaR (Value-at-Risk):</strong> monthly 95% VaR &lt; 10% as a portfolio design guardrail.</li>
-          </ul>
-          <p class="note">The ML long/short book is the anchor. We rotate into basis, options, and yield when pricing and liquidity are favourable.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Performance (net) — ML long/short book</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Year</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>YTD</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>2022</td><td>1.95%</td><td>2.65%</td><td>2.25%</td><td>1.90%</td><td>1.40%</td><td>1.70%</td><td>2.05%</td><td>3.75%</td><td>3.85%</td><td>-0.75%</td><td>2.90%</td><td>3.55%</td><td>27.20%</td></tr>
-            <tr><td>2023</td><td>3.65%</td><td>4.25%</td><td>3.10%</td><td>6.50%</td><td>2.90%</td><td>0.40%</td><td>-1.10%</td><td>2.85%</td><td>1.85%</td><td>2.80%</td><td>2.70%</td><td>-0.70%</td><td>29.20%</td></tr>
-            <tr><td>2024</td><td>3.30%</td><td>4.95%</td><td>2.75%</td><td>3.85%</td><td>0.65%</td><td>0.55%</td><td>1.40%</td><td>2.00%</td><td>4.05%</td><td>4.30%</td><td>-4.35%</td><td>20.75%</td><td>30.40%</td></tr>
-            <tr><td>2025</td><td>6.75%</td><td>2.20%</td><td>1.95%</td><td>0.05%</td><td>-0.10%</td><td>3.25%</td><td>0.15%</td><td>6.40%</td><td>—</td><td>—</td><td>—</td><td>—</td><td>20.65%</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="note">Illustrative, net of typical fees for this book. For professional investors only; past performance is not indicative of future results.</p>
-    </section>
-
-    <section>
-      <h2>Structure &amp; operating setup</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="eyebrow">Vehicle</div>
-          <h3>Meridian Fund SP, Atitlan SPC (Cayman)</h3>
-          <p>Statutory ring-fencing of assets and liabilities; independent oversight; policy stack approved by the board.</p>
-        </div>
-        <div class="card">
-          <div class="eyebrow">Manager</div>
-          <h3>DFi Labs (France) — PSAN E2022-032</h3>
-          <p>We have already set up similar structures and are familiar with administrators, auditors, legal counsel, banks, custody, and exchange onboarding workflows.</p>
-        </div>
-        <div class="card">
-          <div class="eyebrow">Execution</div>
-          <h3>Prime-brokered DMA or direct multi-exchange</h3>
-          <p>We choose what maximises net returns while keeping counterparty exposure controlled; venue concentration caps apply.</p>
-        </div>
-        <div class="card">
-          <div class="eyebrow">Risk</div>
-          <h3>Limits, stress, liquidity ladders</h3>
-          <p>Per-book loss checkpoints, portfolio VaR guardrails, and liquidity-aware sizing to ensure exits remain orderly.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="team">
-      <h2>Team</h2>
-      <div class="team">
-        <div class="person">
-          <img src="olivier.jpg" alt="Olivier Chevillon portrait" />
-          <div>
-            <h4>Olivier Chevillon</h4>
-            <div class="role">CEO &amp; Head of Research</div>
-            <p>Designs the ML long/short and the portfolio framework. Final sign-off on research changes and book adjustments. Former Visium and Maven. Teaches Data &amp; Finance at ESCP.</p>
-          </div>
-        </div>
-        <div class="person">
-          <img src="julien.jpg" alt="Julien Boudier portrait" />
-          <div>
-            <h4>Julien Boudier</h4>
-            <div class="role">Chief Risk Officer • Portfolio Manager</div>
-            <p>Owns limits, stress tests, liquidity ladders, and venue/counterparty caps, with authority to cut exposure intra-day. Former Morgan Stanley, BNP Paribas, LetterOne.</p>
-          </div>
-        </div>
-        <div class="person">
-          <img src="louis.jpg" alt="Louis Benassy portrait" />
-          <div>
-            <h4>Louis Benassy</h4>
-            <div class="role">Chief Operating Officer</div>
-            <p>Fund structuring, counterparties, admin/audit coordination, banking &amp; custody, investor reporting, process automation, and execution oversight.</p>
-          </div>
-        </div>
-        <div class="person">
-          <img src="Leo.jpg" alt="Léo René portrait" />
-          <div>
-            <h4>Léo René</h4>
-            <div class="role">Quant &amp; Execution Manager</div>
-            <p>ML engineering, model implementation, order automation, 24×7 execution monitoring, and transaction cost analytics. Former Qube Research &amp; Technologies.</p>
-          </div>
-        </div>
-        <div class="person">
-          <img src="yuval.jpg" alt="Yuval Reisman portrait" />
-          <div>
-            <h4>Yuval Reisman</h4>
-            <div class="role">Partner (Atitlan SPC)</div>
-            <p>Heads the Atitlan SPC platform; veteran crypto fund manager; oversees counterparty selection and operational resilience.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="foot">
-      <div class="eyebrow">Important</div>
-      <p class="note">
-        For professional investors only. This is not an offer or solicitation to invest in any jurisdiction. Any investment involves risk, including loss of capital. 
-      </p>
-      <p class="mono">Contact: hello@dfi-labs.com • dfi-labs.com</p>
-    </section>
+  <div class="btnbar">
+    <button class="btn" id="pdfBtn">Save as PDF</button>
   </div>
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const id = a.getAttribute('href').slice(1);
-        const el = document.getElementById(id);
-        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
-      });
-    });
-  </script>
+
+  <section class="hero avoid-break">
+    <div class="kicker">MERIDIAN FUND • MARKET NEUTRAL</div>
+    <h1>Flexible, multi-strategy crypto fund run by practitioners</h1>
+    <p class="lead">
+      Objective: uncorrelated crypto alpha (returns independent from the market),
+      a stable return profile, clean execution, and institutional governance.
+      Risk-controlled foundation with room for tactical directional exposure when our signals justify it.
+    </p>
+  </section>
+
+  <section class="card avoid-break">
+    <h3 class="muted small">VEHICLE &amp; GOVERNANCE</h3>
+    <h2>Ring-fenced, institutional, and practical</h2>
+    <p>
+      Meridian Fund SP is a <strong>Segregated Portfolio (SP)</strong> within Atitlan SPC Cayman
+      (<strong>SPC = Segregated Portfolio Company</strong>), providing statutory ring-fencing of assets and liabilities,
+      independent directors, AML officers, and board-approved policies (valuation, best execution, conflicts, cyber).
+    </p>
+    <div class="pill">PSAN registration in France (AMF E2022-032)</div>
+    <div class="pill">Direct multi-exchange or prime-brokered DMA <span class="muted small">(direct market access)</span></div>
+    <div class="pill">Optional third-party custody for reserves</div>
+  </section>
+
+  <section class="card avoid-break">
+    <h3 class="muted small">COUNTERPARTY RISK</h3>
+    <h2>Diversified and capped: no large idle balances</h2>
+    <p>
+      Venue diversification with <em>per-venue caps</em>, minimal idle balances on exchanges, optional custody for reserves,
+      and a flexible counterparty setup so we are not tied to any single provider.
+    </p>
+    <ul>
+      <li>Exposure ladders by liquidity bucket (how fast we can exit) and stress-loss checkpoints.</li>
+      <li>Daily oversight; weekly IC (Investment Committee) for sizing/rotation.</li>
+      <li>Books are <strong>activated only when post-cost edge is positive</strong>; otherwise, they sit at zero.</li>
+    </ul>
+  </section>
+
+  <section class="avoid-break">
+    <h2>Strategy books</h2>
+    <div class="pill">Machine-learning long/short (perpetual futures vs. spot)</div>
+    <p>ML-driven long/short in liquid markets, refreshed daily to capture cross-sectional momentum (assets that recently out- or under-performed). Directional exposure can be taken when model confidence is high.</p>
+    <div class="pill">Basis, opportunistic</div>
+    <p>Cash-and-carry or funding capture only when yields are attractive, usually in a few bursts per year. When carry is thin, we stand down.</p>
+    <div class="pill">Gamma harvesting, options</div>
+    <p>Short-dated, hedged premium capture on top venues, <strong>sized small</strong>, with strict limits and quick adjustments.</p>
+    <div class="pill">Yield on idle cash</div>
+    <p>Conservative yield on USD/stablecoins via tokenised T-bills and custodial programs. Higher-risk yield (structured funding capture or secured lending) only when carry clearly exceeds costs and within hard limits.</p>
+  </section>
+
+  <section class="card avoid-break">
+    <h3 class="muted small">ALLOCATION &amp; RISK</h3>
+    <h2>How we deploy, rotate, and cut</h2>
+    <ul>
+      <li><strong>Decisioning</strong>: daily PM oversight + weekly IC to size, rotate, or pause books.</li>
+      <li><strong>Activation rule</strong>: expected profit <em>after all costs</em> (fees, funding/borrow, execution slippage) must be clearly positive.</li>
+      <li><strong>Loss checkpoints</strong>: each book has pre-set loss triggers; portfolio-level limits sit on top.</li>
+      <li><strong>VaR (Value-at-Risk)</strong>: monthly 95% VaR &lt; 10% as a portfolio design guardrail.</li>
+    </ul>
+    <p class="small muted">The ML long/short book is the anchor. We rotate into basis, options, and yield when pricing and liquidity are favourable.</p>
+  </section>
+
+  <section class="avoid-break">
+    <h2>Performance (net) — ML long/short book</h2>
+    <div class="caption">Monthly returns <strong>Jan–Aug only</strong> (YTD compounded to Aug)</div>
+    <table class="table small">
+      <thead>
+        <tr><th>YEAR</th><th>JAN</th><th>FEB</th><th>MAR</th><th>APR</th><th>MAY</th><th>JUN</th><th>JUL</th><th>AUG</th><th>YTD (to Aug)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2025</td><td>6.75%</td><td>2.20%</td><td>1.95%</td><td>0.05%</td><td>-0.10%</td><td>3.25%</td><td>0.15%</td><td>6.40%</td><td><strong>22.41%</strong></td></tr>
+        <tr><td>2024</td><td>3.30%</td><td>4.95%</td><td>2.75%</td><td>3.85%</td><td>0.65%</td><td>0.55%</td><td>1.40%</td><td>2.00%</td><td><strong>21.26%</strong></td></tr>
+        <tr><td>2023</td><td>3.65%</td><td>4.25%</td><td>3.10%</td><td>6.50%</td><td>2.90%</td><td>0.40%</td><td>-1.10%</td><td>2.85%</td><td><strong>24.30%</strong></td></tr>
+        <tr><td>2022</td><td>1.95%</td><td>2.65%</td><td>2.25%</td><td>1.90%</td><td>1.40%</td><td>1.70%</td><td>2.05%</td><td>3.75%</td><td><strong>19.20%</strong></td></tr>
+      </tbody>
+    </table>
+    <p class="small muted">Illustrative; net of typical fees for this book. For professional investors only; past performance is not indicative of future results.</p>
+  </section>
+
+  <section class="two-col avoid-break">
+    <div class="card">
+      <h3 class="muted small">VEHICLE</h3>
+      <h2>Meridian Fund SP, Atitlan SPC (Cayman)</h2>
+      <p>Statutory ring-fencing of assets and liabilities; independent oversight; policy stack approved by the board.</p>
+    </div>
+    <div class="card">
+      <h3 class="muted small">MANAGER</h3>
+      <h2>DFi Labs (France): PSAN E2022-032</h2>
+      <p>We have already set up similar structures and are familiar with administrators, auditors, legal counsel, banks, custody, and exchange onboarding workflows.</p>
+    </div>
+    <div class="card">
+      <h3 class="muted small">EXECUTION</h3>
+      <h2>Prime-brokered DMA or direct multi-exchange</h2>
+      <p>We choose what maximises net returns while keeping counterparty exposure controlled; venue concentration caps apply.</p>
+      <p class="small muted">(DMA = direct market access.)</p>
+    </div>
+    <div class="card">
+      <h3 class="muted small">RISK</h3>
+      <h2>Limits, stress, liquidity ladders</h2>
+      <p>Per-book loss checkpoints, portfolio VaR guardrails, and liquidity-aware sizing to ensure exits remain orderly.</p>
+    </div>
+  </section>
+
+  <section class="avoid-break">
+    <h2>Team</h2>
+    <div class="team">
+      <div class="person">
+        <img class="photo" src="olivier.jpg" alt="Olivier Chevillon" />
+        <div>
+          <div class="name">Olivier Chevillon</div>
+          <div class="role">CEO &amp; Head of Research</div>
+          <div>Designs the ML long/short and the portfolio framework. Final sign-off on research changes and book adjustments. Former Visium and Maven. Teaches Data &amp; Finance at ESCP.</div>
+        </div>
+      </div>
+
+      <div class="person">
+        <img class="photo" src="julien.jpg" alt="Julien Boudier" />
+        <div>
+          <div class="name">Julien Boudier</div>
+          <div class="role">Chief Risk Officer</div>
+          <div>Owns limits, stress tests, liquidity ladders, and venue/counterparty caps, with authority to cut exposure intra-day. Former Morgan Stanley, BNP Paribas, LetterOne.</div>
+        </div>
+      </div>
+
+      <div class="person">
+        <img class="photo" src="louis.jpg" alt="Louis Benassy" />
+        <div>
+          <div class="name">Louis Benassy</div>
+          <div class="role">Chief Operating Officer</div>
+          <div>Fund structuring, counterparties, admin/audit coordination, banking &amp; custody, investor reporting, process automation, and execution oversight.</div>
+        </div>
+      </div>
+
+      <div class="person">
+        <img class="photo" src="Leo.jpg" alt="Léo René" />
+        <div>
+          <div class="name">Léo René</div>
+          <div class="role">Quant &amp; Execution Manager</div>
+          <div>ML engineering, model implementation, order automation, 24×7 execution monitoring, and transaction cost analytics. Former Qube Research &amp; Technologies.</div>
+        </div>
+      </div>
+
+      <div class="person avoid-break">
+        <img class="photo" src="yuval.jpg" alt="Yuval Reisman" />
+        <div>
+          <div class="name">Yuval Reisman</div>
+          <div class="role">Partner (Atitlan SPC)</div>
+          <div>Heads the Atitlan SPC platform; veteran crypto fund manager; oversees counterparty selection and operational resilience.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer">
+    <div class="small"><strong>Important</strong> — For professional investors only. This is not an offer or solicitation to invest in any jurisdiction. Any investment involves risk, including loss of capital.</div>
+    <div class="small">Contact: <a href="mailto:hello@dfi-labs.com">hello@dfi-labs.com</a> | <a href="https://dfi-labs.com" target="_blank" rel="noreferrer">dfi-labs.com</a></div>
+  </section>
+
+</div>
+
+<!-- Generate a header-free PDF (no browser timestamp/URL/page numbers) -->
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+<script>
+  document.getElementById('pdfBtn').addEventListener('click', () => {
+    const elem = document.getElementById('pdf-root');
+    const opt = {
+      margin: [10,10,10,10],
+      filename: 'Meridian-Fund_Market-Neutral.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, letterRendering:true },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['css','legacy'] }
+    };
+    html2pdf().from(elem).set(opt).save();
+  });
+</script>
 </body>
 </html>
